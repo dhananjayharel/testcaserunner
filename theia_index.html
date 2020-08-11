@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://d9n2pyny5ybdw.cloudfront.net/javatestcase2/bundle.js" charset="utf-8"></script>
+   <script  type="text/javascript">
+   function submitTest(){
+       console.log("in submittest");
+       document.getElementsByClassName("theia-preload")[0].style.display="block";
+       var location = document.location.href;
+       console.log(location);
+       var sessId = location.substring(location.lastIndexOf("/")+1);
+       		  var request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE) {
+                if (this.status === 200) {
+                    console.log(this.response);
+					var data = JSON.parse(this.response);
+					if(data.length>0){
+					console.log('got the data');
+                   document.getElementsByClassName("theia-preload")[0].style.display="none";
+                   document.querySelectorAll(".fa.fa-times.closeButton")[0].click();
+                   alert("Challenge has been submitted!!!");
+					}
+					
+                } else {
+                    document.getElementsByClassName("theia-preload")[0].style.display="none";
+                    alert('Error: Could not fetch!');
+
+                }
+            }
+        };
+
+        request.open('GET', 'https://www.skillstack.com/skillstackapi/RunningContainers/submittesthttp2?tmpdir='+sessId, true);
+        request.send();
+
+
+
+   }
+   </script>
+   
+    <style>
+  .popup_div {
+    font-size: 15px;
+}
+
+table.testcase {
+    border-collapse: collapse;
+    width: 100%;
+    border-color: #948989;
+    margin-top: 5px;
+    background: #1377241a;
+}
+tr.testcase_header {
+ 
+    background: #052d08;
+    font-weight: bold;
+    background: lightGrey;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid black;
+    color: #403030;
+
+}
+tr.wrong_entry {
+      
+    text-align: left;
+    padding-left: 10px;
+    word-break: normal;
+color: #b94a48;
+    background-color: #f2dede;
+}
+tr.right_entry {
+       background: #BFF2B5;
+    text-align: left;
+    padding-left: 10px;
+    word-break: normal;
+    color: #000000;
+}
+.testcase td {
+    padding: 5px;
+}
+#submit_button{
+    background-color: #F1C40F;
+    text-shadow: none;
+    border-radius: 7px;
+    color: #000;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    background-image: none;
+    border: none;
+    padding: 5px;
+    text-decoration: none;
+
+}
+   
+  </style>
+</head>
+
+<body>
+  <div class="theia-preload"></div>
+</body>
+
+</html>
